@@ -10,6 +10,6 @@ To do:
 
 Bugs:
 - UI on showing the stats of weapon lacks a few dash symbol to match the "Crit Damage" stat of the claymore type weapon with the rest of the weapon types
-- Buffs (and possible debuffs) still have no means of expiring despite having negative number of turn left.
+- Buffs (and possibly debuffs) still have no means of expiring despite having negative number of turn left.
 
 I am still a beginner, might take a year or two to see good progress. :(
