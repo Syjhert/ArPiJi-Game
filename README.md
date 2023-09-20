@@ -2,6 +2,8 @@
 RPG Turn-based Game
 Simple Turn-based battle system without GUI yet. Includes a limited amount of battle items, weapons, and moves. Also includes three types of basic enemy types with respective moves. 
 
+Note: The latest commit has not yet been tested and might have a lot of bugs.
+
 To do:
 - Developing the GUI of the turn-based battle system. 
 - Developing the non-battle gameplay and stage-making with a hit of puzzles. 
