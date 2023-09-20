@@ -1,6 +1,11 @@
+package Entities;
+
+import Weapons.Weapon;
+import Moves.*;
+
 import java.util.ArrayList;
 public class Player extends BattleEntity{
-    Player(String name){
+    public Player(String name){
         this.name = name;
         healthPoints = 100;
         maxHealthPoints = 100;
@@ -9,16 +14,16 @@ public class Player extends BattleEntity{
         attackBattle = 10;
         critChance = 0.2;
         critChanceBattle = 0.2;
-        moves.add(new Move("Punch", 1));
+        moves.add(new DamagingM("Punch", 1));
     }
     public void equipWeapon(Weapon weapon){
-        attack += weapon.attack;
+        attack += weapon.getAttack();
         attackBattle = attack;
-        critChance += weapon.critChance;
+        critChance += weapon.getCritChance();
         critChanceBattle = critChance;
-        critDamage += weapon.critDamage;
+        critDamage += weapon.getCritDamage();
         critDamageBattle = critDamage;
-        moves = (ArrayList<Move>) weapon.moves.clone();
+        moves = (ArrayList<Move>) weapon.getMoves().clone();
     }
     public void resetStats(){
         maxHealthPointsBattle = maxHealthPoints;

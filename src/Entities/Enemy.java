@@ -1,8 +1,12 @@
+package Entities;
+
+import Moves.*;
+
 public class Enemy extends BattleEntity{
-    double trapRate;
-    Enemy(){
+    protected float trapRate;
+    public Enemy(){
     }
-    Enemy(String name, int healthPoints, int attack, double trapRate){
+    public Enemy(String name, int healthPoints, int attack, float trapRate){
         this.name = name;
         this.healthPoints = healthPoints;
         maxHealthPoints = healthPoints;
@@ -13,12 +17,12 @@ public class Enemy extends BattleEntity{
         critChanceBattle = critChance;
         this.trapRate = trapRate;
     }
-    public void addMoves(String name, double damage){
-        Move move = new Move(name, damage);
-        moves.add(move);
+    //GETTER
+    public float getTrapRate() {
+        return trapRate;
     }
-    public void addMoves(String name, double damage, int typeAndEffect, double effectAmount, boolean receiverDirected){
-        Move move = new Move(name, damage, typeAndEffect, effectAmount, receiverDirected);
+
+    public void addMoves(Move move){
         moves.add(move);
     }
     public void copy(Enemy enemy){
