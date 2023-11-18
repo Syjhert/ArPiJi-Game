@@ -2,9 +2,6 @@ package Statuses;
 
 import Entities.*;
 
-import java.util.Dictionary;
-import java.util.Hashtable;
-
 public class Buff extends Status{
 
     //BUFF (1) TYPES:
@@ -13,78 +10,71 @@ public class Buff extends Status{
     //3 Crit Chance Buff
     //4 Crit Damage Buff
 
-    private float amount;
+    private final float amount;
 
-    public Buff(String name, int type, float amount){ //Default duration 3 turns
+    public Buff(String name, StatusType type, float amount){ //Default duration 3 turns
         super(name, type);
+        if(type == StatusType.BLEED || type == StatusType.POISON){
+            System.out.println("WARNING: THE BUFF " + name + " HAS BEEN ASSIGNED WITH THE TYPE POISON OR BLEED");
+        }
         this.amount = amount;
     }
-    public Buff (String name, int duration, int type, float amount){
-        super(name, duration, type);
-        this.amount = amount;
+    public Buff (String name, int duration, StatusType type, float amount){
+        this(name, type, amount);
+        this.duration = duration;
     }
-    public Buff (String name, boolean isPermanent, int type, float amount){
-        super(name, isPermanent, type);
-        this.amount = amount;
-    }
-
-    //GETTER
-    public float getAmount() {
-        return amount;
-    }
-    //SETTER
-    public void setAmount(float amount) {
-        this.amount = amount;
-    }
-
     @Override
     public String toString(){
-        String statusDesc = super.toString() + (int)(amount*100)+"%\t";
+        String statusDesc = super.toString() + " Buff : " + (int)(amount*100)+"%\t\t";
         if(getStatusName().length() < 16) statusDesc += "\t";
         if(getStatusName().length() < 24) statusDesc += "\t";
         statusDesc += "Duration: "+duration+" turns";
         return statusDesc;
-    };
-    @Override
-    public boolean isEquals(Status status){
-        if(status instanceof Buff && status.type == type) return true;
-        else return false;
     }
-
     @Override
     public void statusInflict(BattleEntity bE) {
         super.statusInflict(bE);
-        System.out.println(bE.getName() + " was blessed with a " + getStatusName() + "!");
-        if(type == 11) {
-            bE.setMaxHealthPointsBattle(bE.getMaxHealthPoints() + (int)(bE.getMaxHealthPoints()*amount));
-            bE.setHealthPoints(bE.getHealthPoints() + (int)(bE.getMaxHealthPoints()*amount));
-            System.out.println(bE.getName()+"'s max health is increased by "+(int)(bE.getMaxHealthPointsBattle() * amount)+"!");
-            System.out.println(bE.getName()+"'s current health is now "+ bE.getHealthPoints()+" out of "+bE.getMaxHealthPointsBattle()+"!");
-
-        }
-        else if(type == 12) {
-            bE.setAttackBattle(bE.getAttack() + (int)(bE.getAttack() * amount));
-            System.out.println(bE.getName()+"'s attack is increased by "+(int)(bE.getAttack() * amount)+"!");
-            System.out.println(bE.getName()+"'s current attack is now "+bE.getAttackBattle()+"!");
-        }
-        else if(type == 13) {
-            bE.setCritChanceBattle(bE.getCritChanceBattle() + amount);
-            System.out.printf(bE.getName()+" critical chance is increased by %.2f%%!\n", amount*100);
-            System.out.printf(bE.getName()+" current critical chance is now %.2f%%!\n", bE.getCritChanceBattle()*100);
-        }
-        else if(type == 14) {
-            bE.setCritDamageBattle(bE.getCritDamageBattle() + amount);
-            System.out.printf(bE.getName()+" critical damage is increased by %.2f%%!\n", amount*100);
-            System.out.printf(bE.getName()+" current critical damage is now %.2f%%!\n", bE.getCritDamageBattle()*100);
+        System.out.println(bE.getName() + " was blessed with a " + getStatusName() + " Buff!");
+        bE.buffApply(type, amount);
+        switch (type) {         //the message pop up
+            case HEALTH:
+                System.out.println(bE.getName() + "'s max health is increased by " + (int) (bE.getMaxHealthPoints() * amount) + "!");
+                System.out.println(bE.getName() + "'s current health is now " + bE.getHealthPoints() + " out of " + bE.getMaxHealthPointsBattle() + "!");
+                break;
+            case ATTACK:
+                System.out.println(bE.getName() + "'s attack is increased by " + (int) (bE.getAttack() * amount) + "!");
+                System.out.println(bE.getName() + "'s current attack is now " + bE.getAttackBattle() + "!");
+                break;
+            case CRITCHANCE:
+                System.out.printf(bE.getName() + " critical chance is increased by %.2f%%!\n", amount * 100);
+                System.out.printf(bE.getName() + " current critical chance is now %.2f%%!\n", bE.getCritChanceBattle() * 100);
+                break;
+            case CRITDAMAGE:
+                System.out.printf(bE.getName() + " critical damage is increased by %.2f%%!\n", amount * 100);
+                System.out.printf(bE.getName() + " current critical damage is now %.2f%%!\n", bE.getCritDamageBattle() * 100);
+                break;
+            default:
+                System.out.println("STATUSTYPE BUFF ERROR");
+                break;
         }
     }
 
     @Override
-    public void statusDecrement(BattleEntity battleEntity){
-        super.statusDecrement(battleEntity);
-        //add change stats logic
+    public int statusDecrement(BattleEntity battleEntity){
+        if(duration == INFINITE){
+            return 0;
+        }
+        duration--;
+        if(duration == 0){
+            battleEntity.buffApply(type, -amount);
+        }
+        return 0;
     }
-    public boolean isPermanent() {
-        return super.isPermanent();
+
+    @Override
+    public Status cloneStatus() {
+        return new Buff(name, duration, type, amount);
     }
+
+
 }

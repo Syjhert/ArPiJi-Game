@@ -6,15 +6,8 @@ import Moves.*;
 import java.util.ArrayList;
 public class Player extends BattleEntity{
     public Player(String name){
-        this.name = name;
-        healthPoints = 100;
-        maxHealthPoints = 100;
-        maxHealthPointsBattle = 100;
-        attack = 10;
-        attackBattle = 10;
-        critChance = 0.2;
-        critChanceBattle = 0.2;
-        moves.add(new DamagingM("Punch", 1));
+        super(name.compareTo("") == 0 ? "Traveler" : name, 100, 10);
+        moves.add(new DamagingM("Punch", 1, "MELEE", "NONE"));
     }
     public void equipWeapon(Weapon weapon){
         attack += weapon.getAttack();

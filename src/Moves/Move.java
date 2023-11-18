@@ -3,13 +3,12 @@ package Moves;
 import Entities.*;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public abstract class Move {
     protected String name;
     protected boolean receiverDirected = true;
     protected boolean isPassive = false;
-    protected ArrayList<Move> passiveMoves = new ArrayList<Move>();
+    protected ArrayList<Move> passiveMoves = new ArrayList<>();
 
     public Move(String name){
         this.name = name;
@@ -25,7 +24,7 @@ public abstract class Move {
     }
 
     //SETTER
-    public void setPassive(boolean passive) {
+    public void setPassive(boolean passive) { //maybe useful?
         isPassive = passive;
     }
 
@@ -33,7 +32,5 @@ public abstract class Move {
         passiveMoves.add(passiveMove);
     }
 
-    public void doMove(BattleEntity attacker, BattleEntity receiver){
-        System.out.println("<"+attacker.getName()+"> used <"+name+">!");
-    }
+    public abstract int doMove(BattleEntity attacker, BattleEntity receiver);
 }

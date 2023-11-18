@@ -1,15 +1,14 @@
 package Weapons;
 
 import Moves.*;
-import Statuses.*;
 
 import java.util.ArrayList;
-public class Weapon {
+public abstract class Weapon {
     protected String name;
     protected int attack;
     protected double critChance;
     protected double critDamage;
-    protected ArrayList<Move> moves = new ArrayList<Move>();
+    protected ArrayList<Move> moves = new ArrayList<>();
 
     public Weapon(String name, int attack, double critChance, double critDamage){
         this.name = name;
@@ -34,22 +33,8 @@ public class Weapon {
         return moves;
     }
 
-    //SETTER
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-    public void setCritChance(double critChance) {
-        this.critChance = critChance;
-    }
-    public void setCritDamage(double critDamage) {
-        this.critDamage = critDamage;
-    }
-
     public String toString(){
-        if(name.equals("Claymore"))  return "Name: "+name+"\tAttack: "+attack+"\tCritical Chance: "+(int)(critChance*100)+"%\tCritical Damage: "+(int)(critDamage*100)+"%";
+        if(name.equals("Claymore"))  return "Name: "+name+"\tAttack: "+attack+"\tCritical Chance: "+(int)(critChance*100)+"%\t\tCritical Damage: "+(int)(critDamage*100)+"%";
         return "Name: "+name+"\t\tAttack: "+attack+"\tCritical Chance: "+(int)(critChance*100)+"%\tCritical Damage: "+(int)(critDamage*100)+"%";
     }
     public void addMove(Move move){
