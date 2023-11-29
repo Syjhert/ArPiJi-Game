@@ -6,7 +6,7 @@ Note: This is focused on OOP Programming and is made by a beginner.
 
 To do:
 - Developing the GUI of the turn-based battle system. 
-- Developing the non-battle gameplay and stage-making with a hit of puzzles. 
+- Developing the non-battle gameplay and stage-making with a hint of puzzles. 
 
 
 Bugs:
