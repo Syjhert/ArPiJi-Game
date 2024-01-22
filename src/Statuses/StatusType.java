@@ -6,5 +6,10 @@ public enum StatusType {
     CRITCHANCE,
     CRITDAMAGE,
     BLEED,
-    POISON
+    POISON,
+
+
+
+
+    DoT //only used in BattleEntity statuses map
 }

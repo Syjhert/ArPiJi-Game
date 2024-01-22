@@ -8,7 +8,7 @@ import Statuses.StatusType;
 public class Spear extends Weapon{
 
     public Spear() {
-        super("Spear", 10, .40, .40);
+        super("Spear",10,  10, .40f, .40f);
         Move move;
         move = new DamagingM("Dire Sharpening", 0.6, "MELEE", "NONE");
         move.addPassiveMove(new StatusM(new Buff("Sharpened", StatusType.CRITCHANCE, 0.1f), false));

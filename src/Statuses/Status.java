@@ -14,15 +14,6 @@ public abstract class Status {
     int duration;
     StatusType type;
 
-    //GETTERS
-    public String getName() {
-        return name;
-    }
-    //SETTERS
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Status(String name, StatusType type){ //Default duration 3 turns
         this.name = name;
         this.type = type;
@@ -35,6 +26,19 @@ public abstract class Status {
         if(name.length() < 16) statusDesc += "\t";
         statusDesc += "Type: " + getStatusName();
         return statusDesc;
+    }
+    //GETTERS
+    public String getName() {
+        return name;
+    }
+
+    public StatusType getType() {
+        return type;
+    }
+
+    //SETTERS
+    public void setName(String name) {
+        this.name = name;
     }
     public void statusInflict(BattleEntity battleEntity){   //to be overridden
         battleEntity.addStatus(cloneStatus());

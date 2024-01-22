@@ -8,7 +8,7 @@ import Statuses.StatusType;
 public class Sword extends Weapon{
 
     public Sword() {
-        super("Sword", 15, .20, .50);
+        super("Sword", 15, 15, .20f, .50f);
         Move move;
         addMove(new DamagingM("Basic Swing", 0.8, "MELEE", "NONE"));
         move = new DamagingM("Duel Dance", 0.4, "MELEE", "NONE");

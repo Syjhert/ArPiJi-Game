@@ -7,7 +7,7 @@ import Statuses.StatusType;
 public class Claymore extends Weapon{
 
     public Claymore() {
-        super("Claymore", 30, .05, .80);
+        super("Claymore", 20, 30, .05f, .80f);
         Move move;
         addMove(new DamagingM("Swaying Slash", 1, "MELEE", "NONE"));
         move = new DamagingM("Guarding Push", 0.5, "MELEE", "NONE");
