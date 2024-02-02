@@ -8,9 +8,4 @@ To do:
 - Developing the GUI of the turn-based battle system. 
 - Developing the non-battle gameplay and stage-making with a hint of puzzles. 
 
-
-Bugs:
-- UI, tabs are inconsistent when printing stats
-- (Solved?) Buffs (and possibly debuffs) still have no means of expiring despite having a negative number of turns left.
-
 I am still a beginner, might take a year or two to see good progress. :(
